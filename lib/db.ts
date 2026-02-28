@@ -42,8 +42,10 @@ async function connectDB() {
 
     try {
         cached.conn = await cached.promise
+        console.log("✅ DB Connected:", mongoose.connection.readyState)
     } catch (e) {
         cached.promise = null
+        console.error("❌ DB Connection Failed:", e)
         throw e;
     }
 
