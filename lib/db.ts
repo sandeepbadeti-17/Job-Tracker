@@ -1,7 +1,10 @@
 import mongoose from "mongoose"
 import { buffer } from "stream/consumers";
+import dns from "node:dns/promises";    // fix for DNS resolution issue
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-const MONGODB_URI = process.env.MONGODB_URI
+
+const MONGODB_URI = process.env.MONGODB_URI!
 
 interface MongooseCache {
     conn: typeof mongoose | null;
@@ -17,6 +20,13 @@ let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 if (!global.mongoose) {
     global.mongoose = cached
 }
+
+// Temporary: test connection on import
+connectDB().then(() => {
+    console.log("🟢 DB Ready, readyState:", mongoose.connection.readyState)
+}).catch((err) => {
+    console.error("🔴 DB Failed:", err.message)
+})
 
 async function connectDB() {
 
@@ -45,11 +55,13 @@ async function connectDB() {
         console.log("✅ DB Connected:", mongoose.connection.readyState)
     } catch (e) {
         cached.promise = null
-        console.error("❌ DB Connection Failed:", e)
+        console.error("❌ DB Connection Failed:  connection error not connected to MONGODB" )
         throw e;
     }
 
     return cached.conn;
 }
+
+
 
 export default connectDB;
