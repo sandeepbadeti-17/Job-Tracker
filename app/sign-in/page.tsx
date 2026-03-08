@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "@/lib/auth/auth-client";
+import { signIn, signUp } from "@/lib/auth/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SignIn = () => {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,25 +38,26 @@ const SignIn = () => {
       });
 
       if (result.error) {
-        setError(result.error.message ?? "Failed to SignIn");
+        setError(result.error.message ?? "Failed to sign in");
       } else {
         router.push("/dashboard");
       }
-    } catch (error) {
+    } catch (err) {
       setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
   }
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-white p-4">
       <Card className="w-full max-w-md border-gray-200 shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-black">
-            SignIn
+            Sign In
           </CardTitle>
           <CardDescription className="text-gray-600">
-            Enter your credientials to access your account
+            Enter your credentials to access your account
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,14 +74,13 @@ const SignIn = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter Your Email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
                 className="border-gray-300 focus:border-primary focus:ring-primary"
               />
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="password" className="text-gray-700">
                 Password
@@ -88,11 +88,10 @@ const SignIn = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="Password"
-                minLength={8}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={8}
                 className="border-gray-300 focus:border-primary focus:ring-primary"
               />
             </div>
@@ -108,10 +107,10 @@ const SignIn = () => {
             <p className="text-center text-sm text-gray-600">
               Don't have an account?{" "}
               <Link
-                href="/sign-in"
+                href="/sign-up"
                 className="font-medium text-primary hover:underline"
               >
-                Sign In
+                Sign up
               </Link>
             </p>
           </CardFooter>
@@ -119,6 +118,4 @@ const SignIn = () => {
       </Card>
     </div>
   );
-};
-
-export default SignIn;
+}
