@@ -42,7 +42,7 @@ const SignUp = () => {
           }else{
             router.push("/dashboard")
           }
-        } catch (error) {
+        } catch {
           setError("An unexpected error occurred")
         }finally{
           setLoading(false)
@@ -50,13 +50,11 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-white p-4">
-      <Card className="w-full max-w-md border-gray-200 shadow-lg">
+    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-background p-4">
+      <Card className="w-full max-w-md border-border shadow-lg">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-black">
-            SignUp
-          </CardTitle>
-          <CardDescription className="text-gray-600">
+          <CardTitle className="text-2xl font-bold">SignUp</CardTitle>
+          <CardDescription className="text-muted-foreground">
             Create an account to track you application
           </CardDescription>
         </CardHeader>
@@ -70,9 +68,7 @@ const SignUp = () => {
 
             }
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-gray-700">
-                Name
-              </Label>
+              <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
                 type="text"
@@ -80,14 +76,11 @@ const SignUp = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="border-gray-300 focus:border-primary focus:ring-primary"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700">
-                Email
-              </Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -95,14 +88,11 @@ const SignUp = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border-gray-300 focus:border-primary focus:ring-primary"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700">
-                Password
-              </Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -111,7 +101,6 @@ const SignUp = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border-gray-300 focus:border-primary focus:ring-primary"
               />
             </div>
           </CardContent>
@@ -123,7 +112,7 @@ const SignUp = () => {
             >
               {loading ? "Creating account..." : "Sign Up"}
             </Button>
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <Link
                 href="/sign-in"

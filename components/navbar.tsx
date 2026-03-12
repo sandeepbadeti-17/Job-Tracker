@@ -7,17 +7,19 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import SignOutButton from "./sign-out-btn";
 import { useSession } from "@/lib/auth/auth-client";
+import ThemeToggle from "@/components/theme-toggle";
 
 const Navbar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="border-b border-gray-200 bg-white ">
+    <nav className="border-b border-border bg-background">
       <div className="container mx-auto flex h-16 px-4 justify-between">
         <Link
           href="/"
@@ -33,7 +35,7 @@ const Navbar = () => {
               <Link href="/dashboard">
                 <Button
                   variant="ghost"
-                  className="text-gray-700 hover:text-black"
+                  className="text-foreground hover:text-foreground"
                 >
                   Dashboard
                 </Button>
@@ -63,6 +65,9 @@ const Navbar = () => {
                       </p>
                     </div>
                   </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <ThemeToggle />
+                  <DropdownMenuSeparator />
                   <SignOutButton />
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -72,7 +77,7 @@ const Navbar = () => {
               <Link href="/sign-in">
                 <Button
                   variant="ghost"
-                  className="text-gray-700 hover:text-black"
+                  className="text-foreground hover:text-foreground"
                 >
                   Log In
                 </Button>

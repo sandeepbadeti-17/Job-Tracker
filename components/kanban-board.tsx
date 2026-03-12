@@ -6,7 +6,6 @@ import {
   Calendar,
   CheckCircle2,
   Mic,
-  MoreHorizontal,
   MoreVertical,
   Trash2,
   XCircle,
@@ -43,7 +42,6 @@ import { useState } from "react";
 
 interface KanbanBoardProps {
   board: Board;
-  userId: string;
 }
 
 interface ColConfig {
@@ -128,7 +126,7 @@ function DroppableColumn({
 
       <CardContent
         ref={setNodeRef}
-        className={`space-y-2 pt-4 bg-gray-50/50 min-h-[400px] rounded-b-lg ${
+        className={`space-y-2 pt-4 bg-muted/30 min-h-[400px] rounded-b-lg ${
           isOver ? "ring-2 ring-blue-500" : ""
         }`}
       >
@@ -189,7 +187,7 @@ function SortableJobCard({
   );
 }
 
-export default function KanbanBoard({ board, userId }: KanbanBoardProps) {
+export default function KanbanBoard({ board }: KanbanBoardProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const { columns, moveJob } = useBoard(board);
 

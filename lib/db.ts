@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import { buffer } from "stream/consumers";
 import dns from "node:dns/promises";    // fix for DNS resolution issue
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -15,7 +14,7 @@ declare global {
     var mongoose: MongooseCache | undefined;
 }
 
-let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 
 if (!global.mongoose) {
     global.mongoose = cached
